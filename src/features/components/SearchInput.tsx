@@ -1,10 +1,13 @@
-import React, { Dispatch, FC, memo, SetStateAction, useState } from 'react';
+import React, { FC, memo, useState } from 'react';
+
+import { Input } from 'features/ui';
+import { useDebounce } from 'features/hooks';
 
 import searchSvg from 'assets/search.svg';
-import { Input } from 'features/ui';
 
 const SearchInput: FC = () => {
   const [searchValue, sestSearchValue] = useState<string>('');
+  const query = useDebounce(searchValue);
 
   return (
     <div className='bg-[#EDEDED] rounded-xl py-2 px-3 flex gap-3'>
