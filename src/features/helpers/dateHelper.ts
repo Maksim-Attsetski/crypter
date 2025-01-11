@@ -17,6 +17,11 @@ class DateHelper {
 
     return `${days}d ${hours}h ${minutes}m`;
   }
+
+  getDate(dateString: string) {
+    const d = new Date(dateString);
+    return `${d.toDateString()} at ${d.getHours()}h ${d.getMinutes()}m`;
+  }
 }
 
 export const dateHelper = new DateHelper();

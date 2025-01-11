@@ -5,7 +5,7 @@ import { Button } from 'features/ui';
 const ConnectWalletBtn: FC = () => {
   const onClickConnectWallet = () => {};
 
-  return <Button onClick={onClickConnectWallet}>Connect wallet</Button>;
+  return <Button onClick={onClickConnectWallet}>CONNECT WALLET</Button>;
 };
 
 export default memo(ConnectWalletBtn);

@@ -5,6 +5,7 @@ interface IProps extends PropsWithChildren {
   onClick?: () => void;
   to?: string;
   outlined?: boolean;
+  className?: string;
 }
 
 const cls = {
@@ -12,7 +13,13 @@ const cls = {
   filled: 'bg-[#141416] text-white',
 };
 
-const Button: FC<IProps> = ({ onClick, children, outlined = false, to }) => {
+const Button: FC<IProps> = ({
+  onClick,
+  children,
+  outlined = false,
+  to,
+  className = '',
+}) => {
   const nav = useNavigate();
 
   const onBtnClick = () => {
@@ -27,7 +34,7 @@ const Button: FC<IProps> = ({ onClick, children, outlined = false, to }) => {
     <button
       className={`${
         cls[outlined ? 'outlined' : 'filled']
-      } border-[#141416] border-solid border-2 uppercase rounded-xl py-2 px-4`}
+      } ${className} border-[#141416] border-solid border-2 rounded-xl py-2 px-4`}
       onClick={onBtnClick}
     >
       {children}

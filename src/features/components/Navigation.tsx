@@ -1,7 +1,7 @@
 import React, { FC, memo, useEffect } from 'react';
 import { Route, Routes } from 'react-router';
 
-import { Creators, Discover, Home, Sell, Stats } from 'pages';
+import { Creators, Discover, Home, Nft, Sell, Stats } from 'pages';
 import { navLinksData } from 'features/data';
 import { useNft } from 'sliced';
 
@@ -22,10 +22,11 @@ const Navigation: FC = () => {
     <Routes>
       <Route path='/' element={<Layout />}>
         <Route path={navLinksData.home} element={<Home />} />
-        <Route path={navLinksData.discover} element={<Discover />} />
         <Route path={navLinksData.sell} element={<Sell />} />
         <Route path={navLinksData.stats} element={<Stats />} />
         <Route path={navLinksData.creators} element={<Creators />} />
+        <Route path={navLinksData.discover} element={<Discover />} />
+        <Route path={navLinksData.discover + '/:id'} element={<Nft />} />
       </Route>
     </Routes>
   );

@@ -1,7 +1,8 @@
 import Creators from './Creators';
 import Discover from './Discover';
 import Home from './Home';
+import Nft from './Nft';
 import Sell from './Sell';
 import Stats from './Stats';
 
-export { Home, Discover, Creators, Stats, Sell };
+export { Nft, Home, Discover, Creators, Stats, Sell };

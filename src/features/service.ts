@@ -23,6 +23,11 @@ export class Service {
       .eq((by ?? 'user_id') as string, value);
     return res;
   }
+
+  getSbSelect() {
+    return supabase.from(this.url).select('*');
+  }
+
   async create<T>(data: T): Promise<PostgrestSingleResponse<T[]>> {
     const res = await supabase.from(this.url).insert([data]).select('*');
     return res;
