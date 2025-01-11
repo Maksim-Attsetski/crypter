@@ -45,6 +45,18 @@ const Home: FC = () => {
           </div>
         </section>
       </article>
+      <br />
+      <br />
+      <br />
+      <article className='bg-[#F1F1F1]'>
+        <section className='container'>
+          <br />
+          <h2 className='text-center text-textGrey opacity-40 text-4xl font-semibold'>
+            Weekly — Top NFT
+          </h2>
+          <br />
+        </section>
+      </article>
     </div>
   );
 };

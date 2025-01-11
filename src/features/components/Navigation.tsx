@@ -1,10 +1,23 @@
-import React, { FC, memo } from 'react';
+import React, { FC, memo, useEffect } from 'react';
 import { Route, Routes } from 'react-router';
+
 import { Creators, Discover, Home, Sell, Stats } from 'pages';
 import { navLinksData } from 'features/data';
+import { useNft } from 'sliced';
+
 import Layout from './Layout';
 
 const Navigation: FC = () => {
+  const { onGetAllNft } = useNft();
+
+  const onGetAll = async () => {
+    await onGetAllNft();
+  };
+
+  useEffect(() => {
+    onGetAll();
+  }, []);
+
   return (
     <Routes>
       <Route path='/' element={<Layout />}>
