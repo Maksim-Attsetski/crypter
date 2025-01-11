@@ -1,9 +1,11 @@
 import React, { FC, memo, useMemo, useState } from 'react';
-import logo from 'assets/logo.svg';
 import { NavLink } from 'react-router';
+
 import { navLinksData } from 'features/data';
+
 import SearchInput from './SearchInput';
 import ConnectWalletBtn from './ConnectWalletBtn';
+import Logo from 'assets/Logo';
 
 const NavBar: FC = () => {
   const navLinks = useMemo(() => {
@@ -19,11 +21,17 @@ const NavBar: FC = () => {
     <header className='container'>
       <div className='flex gap-7 py-3 items-center justify-between'>
         <NavLink to={'/'}>
-          <img src={logo} className='' alt='logo' />
+          <Logo />
         </NavLink>
         <nav className='flex gap-7 items-center'>
           {navLinks.map((link) => (
-            <NavLink className={'uppercase'} key={link.path} to={link.path}>
+            <NavLink
+              className={
+                'uppercase transition-all duration-300 text-[#606060] hover:text-black'
+              }
+              key={link.path}
+              to={link.path}
+            >
               {link.name}
             </NavLink>
           ))}

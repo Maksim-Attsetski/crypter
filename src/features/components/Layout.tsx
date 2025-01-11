@@ -1,20 +1,19 @@
 import React, { FC, memo } from 'react';
-import NavBar from './NavBar';
 import { Outlet } from 'react-router';
+
+import NavBar from './NavBar';
+import Footer from './Footer';
 
 const Layout: FC = () => {
   return (
-    <>
+    <div className='flex flex-col h-screen'>
       <NavBar />
       <main>
         <Outlet />
       </main>
-      <footer>
-        <div>
-          <p>footer</p>
-        </div>
-      </footer>
-    </>
+      <br />
+      <Footer />
+    </div>
   );
 };
 

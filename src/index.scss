@@ -15,3 +15,7 @@ body {
 :focus {
   outline: none;
 }
+
+nav a.active {
+  color: #000;
+}
