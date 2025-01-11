@@ -1,11 +1,11 @@
-import React, { FC, memo, useMemo, useState } from 'react';
+import React, { FC, memo, useMemo } from 'react';
 import { NavLink } from 'react-router';
 
 import { navLinksData } from 'features/data';
+import Logo from 'assets/Logo';
 
 import SearchInput from './SearchInput';
 import ConnectWalletBtn from './ConnectWalletBtn';
-import Logo from 'assets/Logo';
 
 const NavBar: FC = () => {
   const navLinks = useMemo(() => {

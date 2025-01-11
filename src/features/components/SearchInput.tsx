@@ -9,6 +9,8 @@ const SearchInput: FC = () => {
   const [searchValue, sestSearchValue] = useState<string>('');
   const query = useDebounce(searchValue);
 
+  console.log(query);
+
   return (
     <div className='bg-[#EDEDED] rounded-xl py-2 px-3 flex gap-3'>
       <img src={searchSvg} alt='search' />

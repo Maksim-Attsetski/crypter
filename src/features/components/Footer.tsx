@@ -1,8 +1,8 @@
 import React, { FC, memo } from 'react';
 
-import logo from 'assets/logo.svg';
-import Logo from 'assets/Logo';
 import { NavLink } from 'react-router';
+
+import Logo from 'assets/Logo';
 import { navLinksData } from 'features/data';
 
 const Footer: FC = () => {
