@@ -1,7 +1,9 @@
-import React, { FC, memo, useMemo } from 'react';
+import React, { FC, memo, useMemo, useState } from 'react';
 import logo from 'assets/logo.svg';
 import { NavLink } from 'react-router';
 import { navLinksData } from 'features/data';
+import SearchInput from './SearchInput';
+import ConnectWalletBtn from './ConnectWalletBtn';
 
 const NavBar: FC = () => {
   const navLinks = useMemo(() => {
@@ -14,18 +16,22 @@ const NavBar: FC = () => {
   }, []);
 
   return (
-    <div>
-      <img src={logo} className='App-logo' alt='logo' />
-      <nav>
-        <ul>
+    <header className='container'>
+      <div className='flex gap-7 py-3 items-center justify-between'>
+        <NavLink to={'/'}>
+          <img src={logo} className='' alt='logo' />
+        </NavLink>
+        <nav className='flex gap-7 items-center'>
           {navLinks.map((link) => (
-            <li key={link.path}>
-              <NavLink to={link.path}>{link.name}</NavLink>
-            </li>
+            <NavLink className={'uppercase'} key={link.path} to={link.path}>
+              {link.name}
+            </NavLink>
           ))}
-        </ul>
-      </nav>
-    </div>
+        </nav>
+        <SearchInput />
+        <ConnectWalletBtn />
+      </div>
+    </header>
   );
 };
 
