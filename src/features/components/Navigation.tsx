@@ -3,15 +3,17 @@ import { Route, Routes } from 'react-router';
 
 import { Creators, Discover, Home, Nft, Sell, Stats } from 'pages';
 import { navLinksData } from 'features/data';
-import { useNft } from 'sliced';
+import { useNft, useUsers } from 'sliced';
 
 import Layout from './Layout';
 
 const Navigation: FC = () => {
   const { onGetAllNft } = useNft();
+  const { onGetUsers } = useUsers();
 
   const onGetAll = async () => {
     await onGetAllNft();
+    await onGetUsers();
   };
 
   useEffect(() => {
