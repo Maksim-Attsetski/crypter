@@ -1,14 +1,15 @@
 import React, { FC, memo, useMemo } from 'react';
 import logo from 'assets/logo.svg';
 import { NavLink } from 'react-router';
+import { navLinksData } from 'features/data';
 
 const NavBar: FC = () => {
   const navLinks = useMemo(() => {
     return [
-      { name: 'Discover', path: '/discover' },
-      { name: 'creators', path: '/creators' },
-      { name: 'sell', path: '/sell' },
-      { name: 'stats', path: '/stats' },
+      { name: 'discover', path: navLinksData.discover },
+      { name: 'creators', path: navLinksData.creators },
+      { name: 'sell', path: navLinksData.sell },
+      { name: 'stats', path: navLinksData.stats },
     ];
   }, []);
 
