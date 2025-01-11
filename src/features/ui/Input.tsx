@@ -1,7 +1,5 @@
 import React, { Dispatch, FC, memo, SetStateAction } from 'react';
 
-import searchSvg from 'assets/search.svg';
-
 interface IProps {
   value: string;
   setValue: Dispatch<SetStateAction<string>>;

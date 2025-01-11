@@ -1,10 +1,11 @@
 import { create } from 'zustand';
+import { INft } from './types';
 
 interface IState {
-  nft: any[];
-  myNft: any[];
-  setNft: (newNft: any[]) => void;
-  setMyNft: (newMyNft: any[]) => void;
+  nft: INft[];
+  myNft: INft[];
+  setNft: (newNft: INft[]) => void;
+  setMyNft: (newMyNft: INft[]) => void;
 }
 
 export const useNftState = create<IState>((use) => ({
