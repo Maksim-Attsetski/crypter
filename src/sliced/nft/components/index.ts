@@ -1,3 +1,5 @@
+import NftListWithFilters from './NftListWithFilters';
 import SmallNFT from './SmallNFT';
+import TopNftList from './TopNftList';
 
-export { SmallNFT };
+export { NftListWithFilters, SmallNFT, TopNftList };

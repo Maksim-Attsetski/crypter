@@ -1,8 +1,9 @@
+import React, { FC, memo, useMemo, useState } from 'react';
+import { NavLink, useParams } from 'react-router';
+
 import { dateHelper } from 'features/helpers';
 import { sbStorageUrl } from 'features/supabase';
 import { Button, Card } from 'features/ui';
-import React, { FC, memo, useMemo, useState } from 'react';
-import { NavLink, useParams } from 'react-router';
 import { useNft } from 'sliced';
 
 import eth from 'assets/eth.svg';
@@ -20,14 +21,6 @@ const Nft: FC = () => {
   const nft = useMemo(
     () => allNft.find((item) => item.id === +(id ?? -1)),
     [id, allNft]
-  );
-
-  const curBid = useMemo(
-    () =>
-      nft && nft.bids.length > 0
-        ? nft.bids.reduce((acc, val) => acc + val.price, 0)
-        : 0,
-    [nft?.bids]
   );
 
   return nft ? (
@@ -68,9 +61,7 @@ const Nft: FC = () => {
               <p className={subTextCls}>Current Bid</p>
               <div className='flex gap-2'>
                 <img src={eth} alt='eth' />
-                <p className='text-xl font-medium'>
-                  {curBid > 0 ? curBid : nft?.price}
-                </p>
+                <p className='text-xl font-medium'>{nft?.price}</p>
               </div>
             </div>
             <div>

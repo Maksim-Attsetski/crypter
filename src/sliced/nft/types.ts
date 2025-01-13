@@ -11,6 +11,7 @@ export interface INft<T = string> {
   image_url: string | null;
   description: '';
   price: number;
+  start_price: number;
   end_at: string;
   created_by: T;
   bids: IBid[];

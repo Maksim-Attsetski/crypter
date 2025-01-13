@@ -1,8 +1,11 @@
-import { Button } from 'features/ui';
 import React, { FC, memo } from 'react';
 
-import heroHeader from 'assets/hero_header.png';
+import { Button } from 'features/ui';
 import { navLinksData } from 'features/data';
+
+import { NftListWithFilters, TopNftList } from 'sliced';
+
+import heroHeader from 'assets/hero_header.png';
 
 const Home: FC = () => {
   return (
@@ -55,7 +58,13 @@ const Home: FC = () => {
             Weekly — Top NFT
           </h2>
           <br />
+          <TopNftList />
+          <br />
         </section>
+      </article>
+
+      <article>
+        <NftListWithFilters />
       </article>
     </div>
   );

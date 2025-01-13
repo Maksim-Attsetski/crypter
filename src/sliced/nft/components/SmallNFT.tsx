@@ -1,14 +1,14 @@
-import React, { FC, memo, useMemo } from 'react';
+import React, { FC, memo } from 'react';
+import { useNavigate } from 'react-router';
 
 import { Button, Card } from 'features/ui';
+import { dateHelper } from 'features/helpers';
+import { sbStorageUrl } from 'features/supabase';
+import { navLinksData } from 'features/data';
 
 import eth from 'assets/eth.svg';
 
-import { IBid, INft } from '../types';
-import { dateHelper } from 'features/helpers';
-import { sbStorageUrl } from 'features/supabase';
-import { useNavigate } from 'react-router';
-import { navLinksData } from 'features/data';
+import { INft } from '../types';
 
 interface IProps {
   nft: INft;
@@ -16,11 +16,6 @@ interface IProps {
 
 const SmallNFT: FC<IProps> = ({ nft }) => {
   const navigation = useNavigate();
-
-  const currentBid = useMemo(
-    () => nft.bids.reduce((acc, val: IBid) => acc + val?.price, 0),
-    [nft?.bids]
-  );
 
   const onClickOnNft = () => {
     navigation(navLinksData.discover + '/' + nft.id);
@@ -43,7 +38,7 @@ const SmallNFT: FC<IProps> = ({ nft }) => {
           <p className='text-sm font-normal text-[#94A3B8]'>Current bid</p>
           <p className='flex items-center gap-1'>
             <img src={eth} alt='eth' />
-            {currentBid > 0 ? currentBid : nft.price}
+            {nft.price}
           </p>
         </div>
         <Button>PLACE BID</Button>
