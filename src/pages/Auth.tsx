@@ -1,6 +1,6 @@
 import Logo from 'assets/Logo';
 import { Button, Input } from 'features/ui';
-import React, { FC, memo, useState } from 'react';
+import React, { FC, memo, useEffect, useState } from 'react';
 import { NavLink, useNavigate } from 'react-router';
 import { IUser } from 'sliced';
 import { useAuth } from 'sliced/auth';
@@ -8,11 +8,13 @@ import { useAuth } from 'sliced/auth';
 import heroItemImg from 'assets/hero_item.png';
 import { AnimatePresence, motion } from 'framer-motion';
 import { navLinksData } from 'features/data';
+import { useWallet } from 'sliced/wallet';
 
 type TAuthMethod = 'login' | 'signup';
 
 const Auth: FC = () => {
-  const { onSignIn, onSignUp } = useAuth();
+  const { onSignIn, onSignUp, user } = useAuth();
+  const { onGetMyWallet } = useWallet();
   const navigate = useNavigate();
 
   const [authMethod, setAuthMethod] = useState<TAuthMethod>('signup');
@@ -24,21 +26,34 @@ const Auth: FC = () => {
   const [email, setEmail] = useState<string>('');
 
   const onSaveInfo = async () => {
-    if (authMethod === 'login') {
-      await onSignIn({ email, password });
-    } else {
-      const newUser = {
-        background: 1,
-        bio,
-        name,
-        fullName,
-        email,
-      } as IUser;
-      await onSignUp({ email, password }, newUser);
+    try {
+      if (authMethod === 'login') {
+        await onSignIn({ email, password });
+      } else {
+        const newUser = {
+          background: 1,
+          bio,
+          name,
+          fullName,
+          email,
+        } as IUser;
+        await onSignUp({ email, password }, newUser);
+      }
+    } catch (error: any) {
+      console.error('error', error);
+      alert(error?.message);
     }
-
-    navigate(navLinksData.home);
   };
+
+  useEffect(() => {
+    if (user?.uid) {
+      (async () => {
+        await onGetMyWallet();
+        navigate(navLinksData.home);
+      })();
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [user?.uid]);
 
   return (
     <div className='bg-gradient-to-r from-[#F9F9F9] from-0% via-[#F9F9F9] via-50% to-50% to-dark'>

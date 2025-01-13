@@ -5,4 +5,5 @@ export const navLinksData = {
   sell: '/sell',
   stats: '/stats',
   auth: '/auth',
+  profile: '/profile',
 };
