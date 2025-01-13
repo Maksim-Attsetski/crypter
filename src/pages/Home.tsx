@@ -1,6 +1,6 @@
 import React, { FC, memo } from 'react';
 
-import { Button } from 'features/ui';
+import { Button, Description } from 'features/ui';
 import { navLinksData } from 'features/data';
 
 import { NftListWithFilters, TopNftList } from 'sliced';
@@ -32,20 +32,13 @@ const Home: FC = () => {
           </div>
           <br />
           <br />
-          <div className='flex gap-7'>
-            <div>
-              <p className='text-3xl font-semibold'>454K+</p>
-              <p className='text-textGrey text-xs'>Art Works</p>
-            </div>
-            <div>
-              <p className='text-3xl font-semibold'>159K+</p>
-              <p className='text-textGrey text-xs'>Creators</p>
-            </div>
-            <div>
-              <p className='text-3xl font-semibold'>87K+</p>
-              <p className='text-textGrey text-xs'>Collections</p>
-            </div>
-          </div>
+          <Description.Group
+            options={[
+              { title: '454K+', children: 'Art Works' },
+              { title: '159K+', children: 'Creators' },
+              { title: '87K+', children: 'Collections' },
+            ]}
+          />
         </section>
       </article>
       <br />
