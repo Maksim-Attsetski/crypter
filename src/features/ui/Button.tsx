@@ -1,3 +1,4 @@
+import { motion } from 'framer-motion';
 import React, { FC, memo, PropsWithChildren } from 'react';
 import { useNavigate } from 'react-router';
 
@@ -9,8 +10,8 @@ interface IProps extends PropsWithChildren {
 }
 
 const cls = {
-  outlined: 'bg-white text-[#141416]',
-  filled: 'bg-[#141416] text-white',
+  outlined: 'bg-white text-dark',
+  filled: 'bg-dark text-white',
 };
 
 const Button: FC<IProps> = ({
@@ -31,14 +32,16 @@ const Button: FC<IProps> = ({
   };
 
   return (
-    <button
+    <motion.button
+      whileTap={{ scale: 0.95 }}
+      whileHover={{ scale: 1.05 }}
       className={`${
         cls[outlined ? 'outlined' : 'filled']
-      } ${className} border-[#141416] border-solid border-2 rounded-xl py-2 px-4`}
+      } ${className} border-dark border-solid border-2 rounded-xl py-2 px-4`}
       onClick={onBtnClick}
     >
       {children}
-    </button>
+    </motion.button>
   );
 };
 

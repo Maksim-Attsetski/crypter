@@ -21,7 +21,7 @@ const Home: FC = () => {
           <p className='text-textGrey'>
             Discover, Create and Sell NFTs On Our NFT Marketplace With Over
             Thousands Of NFTs And Get a{' '}
-            <span className='text-black font-semibold'>$20 bonus</span>.
+            <span className='text-dark font-semibold'>$20 bonus</span>.
           </p>
           <br />
           <div className='flex gap-6'>

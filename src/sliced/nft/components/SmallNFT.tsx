@@ -32,7 +32,7 @@ const SmallNFT: FC<IProps> = ({ nft }) => {
         alt={nft.name}
       />
 
-      <p className='font-semibold text-2xl text-black'>{nft.name}</p>
+      <p className='font-semibold text-2xl text-dark'>{nft.name}</p>
       <div className='flex gap-3 justify-between'>
         <div>
           <p className='text-sm font-normal text-[#94A3B8]'>Current bid</p>

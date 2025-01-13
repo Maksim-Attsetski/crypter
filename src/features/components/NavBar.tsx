@@ -27,7 +27,7 @@ const NavBar: FC = () => {
           {navLinks.map((link) => (
             <NavLink
               className={
-                'uppercase transition-all duration-300 text-[#606060] hover:text-black'
+                'uppercase transition-all duration-300 text-[#606060] hover:text-dark'
               }
               key={link.path}
               to={link.path}

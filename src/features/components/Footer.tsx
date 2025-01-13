@@ -7,7 +7,7 @@ import { navLinksData } from 'features/data';
 
 const Footer: FC = () => {
   return (
-    <footer className='mt-auto bg-black text-white'>
+    <footer className='mt-auto bg-dark text-white'>
       <br />
       <div className='container'>
         <div className='flex justify-between'>

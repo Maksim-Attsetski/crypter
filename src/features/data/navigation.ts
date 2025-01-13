@@ -4,4 +4,5 @@ export const navLinksData = {
   creators: '/creators',
   sell: '/sell',
   stats: '/stats',
+  auth: '/auth',
 };
