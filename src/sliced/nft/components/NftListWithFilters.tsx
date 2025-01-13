@@ -26,7 +26,7 @@ const NftListWithFilters: FC = () => {
 
     return [...nft]
       .sort((a, b) => sortFunc(sortWay === 'asc' ? [a, b] : [b, a]))
-      .slice(0, 9);
+      .slice(0, 8);
   }, [nft, sortBy, sortWay]);
 
   const onClickOnSortBtn = (by: keyof INft | 'all') => {
