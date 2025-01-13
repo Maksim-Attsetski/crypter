@@ -1,3 +1,4 @@
 import { useDebounce } from './useDebounce';
+import { useMessage } from './useMessage';
 
-export { useDebounce };
+export { useMessage, useDebounce };

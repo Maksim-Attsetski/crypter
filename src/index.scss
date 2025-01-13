@@ -5,7 +5,7 @@
 body {
   font-family: 'Poppins', Calibri, sans-serif;
   letter-spacing: 0.4px;
-   font-size: 16px;
+  @apply text-base max-w-[100vw] overflow-x-hidden;
 }
 
 .container {

@@ -26,8 +26,6 @@ const Navigation: FC = () => {
 
   const onGetAll = async () => {
     const id = await onGetUserAfterReload();
-    console.log('id', id);
-
     if (id) {
       await onGetMyWallet(id);
     }
@@ -38,6 +36,7 @@ const Navigation: FC = () => {
 
   useEffect(() => {
     onGetAll();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
