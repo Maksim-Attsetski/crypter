@@ -68,13 +68,20 @@ const NavBar: FC = () => {
           <nav className='hidden md:flex gap-7 items-center'>
             <LinkList setIsOpen={setIsOpen} />
           </nav>
-          <div className='lg:flex hidden'>
+          <div className='lg:flex hidden gap-3'>
             <SearchInput />
             <ConnectWalletBtn />
           </div>
           <div className='lg:hidden flex gap-2'>
             <ConnectWalletBtn />
-            <Button onClick={onToggleMenu}>X</Button>
+            <Button onClick={onToggleMenu}>
+              <motion.p
+                animate={{ rotate: isOpen ? 45 : 0, scale: 2.5 }}
+                initial={{ rotate: 0 }}
+              >
+                +
+              </motion.p>
+            </Button>
           </div>
         </div>
         <motion.div

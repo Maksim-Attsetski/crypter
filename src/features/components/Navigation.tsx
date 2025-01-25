@@ -7,6 +7,7 @@ import {
   Discover,
   Home,
   Nft,
+  PrivacyPolicy,
   Profile,
   Sell,
   Stats,
@@ -17,6 +18,9 @@ import { useNft, useUsers } from 'sliced';
 import Layout from './Layout';
 import { useAuth } from 'sliced/auth';
 import { useWallet } from 'sliced/wallet';
+import TermConditions from 'pages/TermConditions';
+import About from 'pages/About';
+import Contacts from 'pages/Contacts';
 
 const Navigation: FC = () => {
   const { onGetAllNft } = useNft();
@@ -60,6 +64,13 @@ const Navigation: FC = () => {
         <Route path={navLinksData.discover + '/:id'} element={<Nft />} />
         <Route path={navLinksData.profile} element={<Profile />} />
         <Route path={navLinksData.profile + '/:id'} element={<Profile />} />
+        <Route path={navLinksData.privacyPolicy} element={<PrivacyPolicy />} />
+        <Route
+          path={navLinksData.termConditions}
+          element={<TermConditions />}
+        />
+        <Route path={navLinksData.about} element={<About />} />
+        <Route path={navLinksData.contacts} element={<Contacts />} />
       </Route>
       <Route path={navLinksData.auth} element={<Auth />} />
     </Routes>

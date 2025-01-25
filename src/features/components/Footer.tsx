@@ -18,27 +18,27 @@ const Footer: FC = () => {
           <div className='flex gap-6 items-center flex-wrap'>
             <NavLink
               className={'hover:text-white text-[#B9B9B9]'}
-              to={navLinksData.creators}
+              to={navLinksData.privacyPolicy}
             >
               Privacy Policy
             </NavLink>
             <NavLink
               className={'hover:text-white text-[#B9B9B9]'}
-              to={navLinksData.creators}
+              to={navLinksData.termConditions}
             >
               Term & Conditions
             </NavLink>
             <NavLink
               className={'hover:text-white text-[#B9B9B9]'}
-              to={navLinksData.creators}
+              to={navLinksData.about}
             >
               About Us
             </NavLink>
             <NavLink
               className={'hover:text-white text-[#B9B9B9]'}
-              to={navLinksData.creators}
+              to={navLinksData.contacts}
             >
-              Contact
+              Contacts
             </NavLink>
           </div>
         </div>

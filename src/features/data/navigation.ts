@@ -6,4 +6,8 @@ export const navLinksData = {
   stats: '/stats',
   auth: '/auth',
   profile: '/profile',
+  privacyPolicy: '/privacy-policy',
+  termConditions: '/term-conditions',
+  about: '/about',
+  contacts: '/contacts',
 };
