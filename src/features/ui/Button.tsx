@@ -7,6 +7,7 @@ interface IProps extends PropsWithChildren {
   to?: string;
   outlined?: boolean;
   className?: string;
+  disabled?: boolean;
 }
 
 const cls = {
@@ -20,6 +21,7 @@ const Button: FC<IProps> = ({
   outlined = false,
   to,
   className = '',
+  disabled = false,
 }) => {
   const nav = useNavigate();
 
@@ -33,11 +35,14 @@ const Button: FC<IProps> = ({
 
   return (
     <motion.button
+      disabled={disabled}
       whileTap={{ scale: 0.95 }}
       whileHover={{ scale: 1.05 }}
       className={`${
         cls[outlined ? 'outlined' : 'filled']
-      } ${className} border-dark border-solid border-2 rounded-xl py-2 px-4`}
+      } ${className} border-dark border-solid border-2 rounded-xl py-2 px-4 ${
+        disabled ? 'opacity-50 cursor-not-allowed' : ''
+      }`}
       onClick={onBtnClick}
     >
       {children}

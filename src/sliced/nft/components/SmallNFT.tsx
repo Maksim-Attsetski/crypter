@@ -1,4 +1,4 @@
-import React, { FC, memo } from 'react';
+import React, { FC, memo, useMemo } from 'react';
 import { useNavigate } from 'react-router';
 
 import { Button, Card } from 'features/ui';
@@ -21,10 +21,15 @@ const SmallNFT: FC<IProps> = ({ nft }) => {
     navigation(navLinksData.discover + '/' + nft.id);
   };
 
+  const remainedDate = useMemo(
+    () => dateHelper.getUntil(nft.end_at),
+    [nft.end_at]
+  );
+
   return (
     <Card onClick={onClickOnNft} className='relative'>
       <p className='absolute top-6 right-6 text-white p-2 rounded-lg bg-[#1C1D2059]'>
-        {dateHelper.getUntil(nft.end_at)}
+        {remainedDate}
       </p>
       <img
         className='h-52 w-52 rounded-xl mb-4'
@@ -41,7 +46,7 @@ const SmallNFT: FC<IProps> = ({ nft }) => {
             {nft.price}
           </p>
         </div>
-        <Button>PLACE BID</Button>
+        <Button disabled={remainedDate === 'Expired'}>PLACE BID</Button>
       </div>
     </Card>
   );

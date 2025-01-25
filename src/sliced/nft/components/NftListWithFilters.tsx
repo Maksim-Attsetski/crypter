@@ -55,7 +55,7 @@ const NftListWithFilters: FC = () => {
         </div>
       </section>
       <br />
-      <section className='flex gap-2'>
+      <section className='flex gap-3 items-center justify-evenly'>
         {filteredNft.map((item) => (
           <SmallNFT nft={item} key={item.id} />
         ))}

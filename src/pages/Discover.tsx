@@ -1,21 +1,22 @@
 import React, { FC, memo, useEffect } from 'react';
-import { SmallNFT, useNft } from 'sliced';
+import { NftListWithFilters, useNft } from 'sliced';
 
 const Discover: FC = () => {
-  const { onGetAllNft, nft } = useNft();
+  const { onGetAllNft } = useNft();
 
   useEffect(() => {
     onGetAllNft();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
-    <div>
-      <div>{JSON.stringify(nft)}</div>
+    <div className='container'>
+      <br />
+      <h3 className='text-4xl text-center'>Discover NFTs</h3>
+      <br />
 
       <div className='container'>
-        {nft.map((item) => (
-          <SmallNFT key={item.id} nft={item} />
-        ))}
+        <NftListWithFilters />
       </div>
     </div>
   );
