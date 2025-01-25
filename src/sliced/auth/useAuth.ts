@@ -63,8 +63,8 @@ export const useAuth = () => {
   const onGetUserAfterReload = async () => {
     const { data } = await supabase.auth.getSession();
     const id = data.session?.user?.id;
-    if (data.session?.user?.id) {
-      const res = await onGetUser(data.session?.user?.id);
+    if (id) {
+      const res = await onGetUser(id);
       setUser(res);
     }
 

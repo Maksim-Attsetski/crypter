@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import React, { FC, memo, PropsWithChildren } from 'react';
+import React, { FC, memo, MouseEventHandler, PropsWithChildren } from 'react';
 import { useNavigate } from 'react-router';
 
 interface IProps extends PropsWithChildren {
@@ -25,7 +25,10 @@ const Button: FC<IProps> = ({
 }) => {
   const nav = useNavigate();
 
-  const onBtnClick = () => {
+  const onBtnClick: MouseEventHandler<HTMLButtonElement> = (e) => {
+    // needed for click on nft item
+    e.stopPropagation();
+
     if (to) {
       nav(to);
       return;

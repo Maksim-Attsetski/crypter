@@ -1,6 +1,7 @@
 export interface IWalletActivity {
   action: 'sell' | 'buy';
   nft_id: string;
+  byPrice: number;
 }
 
 export interface IWallet<U = number, C = string> {

@@ -17,6 +17,16 @@ export const useUsers = () => {
     return data.data?.[0] ?? null;
   };
 
+  const onGetUserList = async (uids: string[]) => {
+    const data = await userService.getSbSelect().in('uid', uids);
+
+    if (data?.error) {
+      throw new Error(data?.error?.message);
+    }
+
+    return data.data;
+  };
+
   const onCreateUser = async (data: IUser) => {
     const response = await userService.create(data);
     if (response.data?.[0]) {
@@ -24,5 +34,5 @@ export const useUsers = () => {
     }
   };
 
-  return { users, onGetUsers, onGetUser, onCreateUser };
+  return { users, onGetUsers, onGetUser, onCreateUser, onGetUserList };
 };

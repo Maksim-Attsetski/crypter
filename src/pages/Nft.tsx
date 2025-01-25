@@ -7,7 +7,7 @@ import { Button, Card, Description } from 'features/ui';
 import { IUser, SmallNFT, useNft, useUsers, INft } from 'sliced';
 import { useAuth } from 'sliced/auth';
 
-import eth from 'assets/eth.svg';
+import Eth from 'assets/Eth';
 import wallet from 'assets/wallet.svg';
 
 const Nft: FC = () => {
@@ -27,8 +27,8 @@ const Nft: FC = () => {
   );
 
   const isMyNft = useMemo(
-    () => user?.uid === nft?.created_by,
-    [nft?.created_by, user?.uid]
+    () => user?.uid === owner?.uid,
+    [owner?.uid, user?.uid]
   );
 
   const onGetCreatorNft = async () => {
@@ -90,7 +90,7 @@ const Nft: FC = () => {
           <div className='flex justify-between'>
             <Description.Reverse title='Current Bid'>
               <div className='flex gap-2'>
-                <img src={eth} alt='eth' />
+                <Eth />
                 <p className='text-xl font-medium'>{nft?.price}</p>
               </div>
             </Description.Reverse>
@@ -102,10 +102,16 @@ const Nft: FC = () => {
           </div>
           <br />
           <br />
-          <Button className='flex gap-2 w-full justify-center'>
-            <img src={wallet} alt='wallet' />
-            <span className='font-bold text-lg'>Place bid</span>
-          </Button>
+          {isMyNft ? (
+            <Button className='flex gap-2 w-full justify-center'>
+              Your NFT
+            </Button>
+          ) : (
+            <Button className='flex gap-2 w-full justify-center'>
+              <img src={wallet} alt='wallet' />
+              <span className='font-bold text-lg'>Place bid</span>
+            </Button>
+          )}
         </section>
       </Card>
       <br />

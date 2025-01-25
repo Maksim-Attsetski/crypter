@@ -18,9 +18,11 @@ class DateHelper {
     return `${days}d ${hours}h ${minutes}m`;
   }
 
-  getDate(dateString: string) {
-    const d = new Date(dateString);
-    return `${d.toDateString()} at ${d.getHours()}h ${d.getMinutes()}m`;
+  getDate(dateString?: string, full: boolean = true) {
+    const d = dateString ? new Date(dateString) : new Date();
+    return `${d.toDateString()}${
+      full ? ` at ${d.getHours()}h ${d.getMinutes()}m` : ''
+    }`;
   }
 }
 

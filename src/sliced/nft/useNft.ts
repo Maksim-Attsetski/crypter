@@ -37,5 +37,17 @@ export const useNft = () => {
     await onGetMyNft(user_id);
   };
 
-  return { nft, myNft, onGetAllNft, onGetNft };
+  const onUpdateNft = async (data: INft) => {
+    const res = await nftService.update('' + data.id, data);
+
+    if (res.error) {
+      throw new Error(res.error?.message);
+    }
+
+    setNft(
+      nft.map((item) => (item.id === data.id ? { ...item, ...data } : item))
+    );
+  };
+
+  return { nft, myNft, onGetAllNft, onGetNft, onUpdateNft };
 };
