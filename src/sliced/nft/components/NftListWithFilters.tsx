@@ -39,7 +39,7 @@ const NftListWithFilters: FC = () => {
   return (
     <article className='container py-6'>
       <section>
-        <div className='flex gap-2 items-center'>
+        <div className='flex gap-2 items-center flex-wrap'>
           <p className='font-semibold text-2xl mr-3'>
             {sortWay === 'desc' ? 'Desc' : 'Asc'}
           </p>
@@ -55,7 +55,7 @@ const NftListWithFilters: FC = () => {
         </div>
       </section>
       <br />
-      <section className='flex gap-3 items-center justify-evenly'>
+      <section className='flex gap-3 flex-wrap items-center justify-evenly'>
         {filteredNft.map((item) => (
           <SmallNFT nft={item} key={item.id} />
         ))}

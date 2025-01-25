@@ -10,12 +10,12 @@ const Footer: FC = () => {
     <footer className='mt-auto bg-dark text-white'>
       <br />
       <div className='container'>
-        <div className='flex justify-between'>
+        <div className='flex justify-between gap-3 flex-wrap'>
           <div className='flex gap-3 items-center'>
             <Logo fill='#fff' />
             <p className='text-3xl font-semibold'>Crypter Sea</p>
           </div>
-          <div className='flex gap-6 items-center'>
+          <div className='flex gap-6 items-center flex-wrap'>
             <NavLink
               className={'hover:text-white text-[#B9B9B9]'}
               to={navLinksData.creators}
