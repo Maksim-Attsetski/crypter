@@ -1,4 +1,4 @@
-import React, { FC, memo, useEffect } from 'react';
+import React, { FC, memo, useEffect, useState } from 'react';
 import { Route, Routes } from 'react-router';
 
 import {
@@ -24,14 +24,24 @@ const Navigation: FC = () => {
   const { onGetUserAfterReload } = useAuth();
   const { onGetMyWallet } = useWallet();
 
-  const onGetAll = async () => {
-    const id = await onGetUserAfterReload();
-    if (id) {
-      await onGetMyWallet(id);
-    }
+  const [loading, setLoading] = useState<boolean>(true);
 
-    await onGetAllNft(id);
-    await onGetUsers();
+  const onGetAll = async () => {
+    setLoading(true);
+
+    try {
+      const id = await onGetUserAfterReload();
+      if (id) {
+        await onGetMyWallet(id);
+      }
+
+      await onGetAllNft(id);
+      await onGetUsers();
+    } catch (error) {
+      console.error(error);
+    } finally {
+      setLoading(false);
+    }
   };
 
   useEffect(() => {
@@ -41,7 +51,7 @@ const Navigation: FC = () => {
 
   return (
     <Routes>
-      <Route path='/' element={<Layout />}>
+      <Route path='/' element={<Layout loading={loading} />}>
         <Route path={navLinksData.home} element={<Home />} />
         <Route path={navLinksData.sell} element={<Sell />} />
         <Route path={navLinksData.stats} element={<Stats />} />

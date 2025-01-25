@@ -3,10 +3,17 @@ import { Outlet } from 'react-router';
 
 import NavBar from './NavBar';
 import Footer from './Footer';
+import { Modal } from 'features/ui';
 
-const Layout: FC = () => {
+interface IProps {
+  loading: boolean;
+}
+const Layout: FC<IProps> = ({ loading }) => {
   return (
     <div className='flex flex-col h-screen'>
+      <Modal isVisible={loading} setIsVisible={() => {}}>
+        <p className='text-4xl'>Loading...</p>
+      </Modal>
       <NavBar />
       <main>
         <Outlet />
