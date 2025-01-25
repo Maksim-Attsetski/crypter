@@ -13,7 +13,7 @@ export const useUsers = () => {
   };
 
   const onGetUser = async (uid: string, by: keyof IUser = 'uid') => {
-    const data = await userService.getBy(uid, by);
+    const data = await userService.getBy<IUser>(uid, by);
     return data.data?.[0] ?? null;
   };
 

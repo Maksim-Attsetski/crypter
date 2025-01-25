@@ -1,20 +1,23 @@
-import React, { FC, memo, useMemo, useState } from 'react';
+import React, { FC, memo, useEffect, useMemo, useState } from 'react';
 import { NavLink, useParams } from 'react-router';
 
 import { dateHelper } from 'features/helpers';
 import { sbStorageUrl } from 'features/supabase';
-import { Button, Card } from 'features/ui';
-import { useNft } from 'sliced';
+import { Button, Card, Description } from 'features/ui';
+import { IUser, SmallNFT, useNft, useUsers, INft } from 'sliced';
+import { useAuth } from 'sliced/auth';
 
 import eth from 'assets/eth.svg';
 import wallet from 'assets/wallet.svg';
 
-const subTextCls = 'text-[#8D8D8D]';
-
 const Nft: FC = () => {
-  const { nft: allNft } = useNft();
-  const [owner, setOwner] = useState(null);
-  const [creator, setCreator] = useState(null);
+  const { nft: allNft, myNft, onGetNft } = useNft();
+  const { user } = useAuth();
+  const { onGetUser } = useUsers();
+
+  const [owner, setOwner] = useState<IUser | null>(null);
+  const [creator, setCreator] = useState<IUser | null>(null);
+  const [nftFromCreator, setNftFromCreator] = useState<INft[]>([]);
 
   const id = useParams()?.id;
 
@@ -22,6 +25,36 @@ const Nft: FC = () => {
     () => allNft.find((item) => item.id === +(id ?? -1)),
     [id, allNft]
   );
+
+  const isMyNft = useMemo(
+    () => user?.uid === nft?.created_by,
+    [nft?.created_by, user?.uid]
+  );
+
+  const onGetCreatorNft = async () => {
+    if (nft?.created_by) {
+      const ownerId = nft?.owner_ids[nft?.owner_ids.length - 1];
+
+      const response = await onGetNft(nft?.created_by);
+      const creatorResponse = await onGetUser(nft?.created_by);
+      const ownerResponse = await (ownerId === user?.uid
+        ? user
+        : onGetUser(ownerId));
+
+      setOwner(ownerResponse);
+      setCreator(creatorResponse);
+      setNftFromCreator(response);
+    }
+  };
+
+  useEffect(() => {
+    if (isMyNft) {
+      setNftFromCreator(myNft);
+    } else {
+      onGetCreatorNft();
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isMyNft, myNft]);
 
   return nft ? (
     <div className='container'>
@@ -35,7 +68,7 @@ const Nft: FC = () => {
       <Card className='max-w-full gap-6 flex justify-between'>
         <div className='rounded-xl w-2/5 overflow-hidden my-auto'>
           <img
-            className='rounded-xl object-contain'
+            className='rounded-xl object-contain min-w-72'
             src={`${sbStorageUrl}nft/${nft.image_url}`}
             alt={nft.name}
           />
@@ -46,30 +79,26 @@ const Nft: FC = () => {
           <p className='text-center font-medium text-[#888888B2]'>
             {nft.description}
           </p>
-          <div className='flex justify-around my-3'>
-            <div>
-              <p className={subTextCls}>Created by</p>
-              <p className='text-xl font-medium'>MaksimAttsetski</p>
-            </div>
-            <div>
-              <p className={subTextCls}>Owned by</p>
-              <p className='text-xl font-medium'>MaksimAttsetski</p>
-            </div>
+          <div className='flex justify-between my-3'>
+            <Description.Reverse title='Created by'>
+              {creator?.name ?? 'unknown'} {creator?.fullName ?? 'unknown'}
+            </Description.Reverse>
+            <Description.Reverse title='Owned by' right>
+              {owner?.name ?? 'unknown'} {owner?.fullName ?? 'unknown'}
+            </Description.Reverse>
           </div>
-          <div className='flex justify-around'>
-            <div>
-              <p className={subTextCls}>Current Bid</p>
+          <div className='flex justify-between'>
+            <Description.Reverse title='Current Bid'>
               <div className='flex gap-2'>
                 <img src={eth} alt='eth' />
                 <p className='text-xl font-medium'>{nft?.price}</p>
               </div>
-            </div>
-            <div>
-              <p className={subTextCls}>End in</p>
+            </Description.Reverse>
+            <Description.Reverse title='End in' right>
               <p className='text-xl font-medium'>
                 {dateHelper.getDate(nft.end_at)}
               </p>
-            </div>
+            </Description.Reverse>
           </div>
           <br />
           <br />
@@ -79,6 +108,13 @@ const Nft: FC = () => {
           </Button>
         </section>
       </Card>
+      <br />
+      <br />
+      <div className='flex gap-4 items-center justify-evenly'>
+        {nftFromCreator.map((item) => (
+          <SmallNFT nft={item} key={item.id} />
+        ))}
+      </div>
     </div>
   ) : (
     <div>

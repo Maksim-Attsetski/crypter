@@ -13,6 +13,17 @@ const DescriptionComp: FC<IProps> = memo(({ title, children }) => {
   );
 });
 
+const ReverseDescriptionComp: FC<IProps & { right?: boolean }> = memo(
+  ({ title, right = false, children }) => {
+    return (
+      <div>
+        <p className={`text-textGrey ${right ? 'text-right' : ''}`}>{title}</p>
+        <p className='text-xl font-medium'>{children}</p>
+      </div>
+    );
+  }
+);
+
 const DescriptionGroup: FC<{ options: IProps[] }> = memo(({ options }) => {
   return (
     <div className='flex gap-7'>
@@ -25,5 +36,6 @@ const DescriptionGroup: FC<{ options: IProps[] }> = memo(({ options }) => {
 
 export const Description = {
   Item: DescriptionComp,
+  Reverse: ReverseDescriptionComp,
   Group: DescriptionGroup,
 };
