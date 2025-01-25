@@ -1,4 +1,11 @@
-import React, { FC, memo, useMemo } from 'react';
+import React, {
+  Dispatch,
+  FC,
+  memo,
+  SetStateAction,
+  useMemo,
+  useState,
+} from 'react';
 import { NavLink } from 'react-router';
 
 import { navLinksData } from 'features/data';
@@ -6,8 +13,14 @@ import Logo from 'assets/Logo';
 
 import SearchInput from './SearchInput';
 import ConnectWalletBtn from './ConnectWalletBtn';
+import { Button } from 'features/ui';
+import { motion } from 'framer-motion';
 
-const NavBar: FC = () => {
+interface ILinkListProps {
+  setIsOpen: Dispatch<SetStateAction<boolean>>;
+}
+
+const LinkList: FC<ILinkListProps> = memo(({ setIsOpen }) => {
   const navLinks = useMemo(() => {
     return [
       { name: 'discover', path: navLinksData.discover },
@@ -18,28 +31,61 @@ const NavBar: FC = () => {
   }, []);
 
   return (
-    <header className='container'>
-      <div className='flex gap-7 py-3 items-center justify-between'>
-        <NavLink to={'/'}>
-          <Logo />
+    <>
+      {navLinks.map((link) => (
+        <NavLink
+          className={
+            'uppercase transition-all duration-300 text-[#606060] hover:text-dark'
+          }
+          key={link.path}
+          to={link.path}
+          onClick={() => setIsOpen(false)}
+        >
+          {link.name}
         </NavLink>
-        <nav className='flex gap-7 items-center'>
-          {navLinks.map((link) => (
-            <NavLink
-              className={
-                'uppercase transition-all duration-300 text-[#606060] hover:text-dark'
-              }
-              key={link.path}
-              to={link.path}
-            >
-              {link.name}
-            </NavLink>
-          ))}
-        </nav>
-        <SearchInput />
-        <ConnectWalletBtn />
-      </div>
-    </header>
+      ))}
+    </>
+  );
+});
+
+const NavBar: FC = () => {
+  const [isOpen, setIsOpen] = useState(false);
+
+  const onToggleMenu = () => {
+    setIsOpen((prev) => {
+      document.body.classList.toggle('overflow-hidden', !prev);
+      return !prev;
+    });
+  };
+
+  return (
+    <>
+      <header className='container'>
+        <div className='flex gap-7 py-3 items-center justify-between'>
+          <NavLink to={'/'}>
+            <Logo />
+          </NavLink>
+          <nav className='hidden md:flex gap-7 items-center'>
+            <LinkList setIsOpen={setIsOpen} />
+          </nav>
+          <div className='lg:flex hidden'>
+            <SearchInput />
+            <ConnectWalletBtn />
+          </div>
+          <div className='lg:hidden flex gap-2'>
+            <ConnectWalletBtn />
+            <Button onClick={onToggleMenu}>X</Button>
+          </div>
+        </div>
+        <motion.div
+          initial={{ x: 0 }}
+          animate={{ x: isOpen ? 0 : '-100%' }}
+          className='fixed z-50 left-0 bg-white w-full h-full flex flex-col gap-4 items-center'
+        >
+          <LinkList setIsOpen={setIsOpen} />
+        </motion.div>
+      </header>
+    </>
   );
 };
 
