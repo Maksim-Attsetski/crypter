@@ -10,35 +10,37 @@ import heroHeader from 'assets/hero_header.png';
 const Home: FC = () => {
   return (
     <div className='mt-5'>
-      <section className='absolute top-16 right-0 w-1/2 h-44 -z-[1]'>
-        <img src={heroHeader} alt='hero' />
-      </section>
+      <article>
+        <section className='absolute top-16 right-0 w-1/2 h-44 -z-[1] hidden md:block'>
+          <img src={heroHeader} alt='hero' />
+        </section>
 
-      <article className='container'>
-        <section className='w-1/2'>
-          <h2 className='text-7xl'>Discover And Create NFTs</h2>
-          <br />
-          <p className='text-textGrey'>
-            Discover, Create and Sell NFTs On Our NFT Marketplace With Over
-            Thousands Of NFTs And Get a{' '}
-            <span className='text-dark font-semibold'>$20 bonus</span>.
-          </p>
-          <br />
-          <div className='flex gap-6'>
-            <Button to={navLinksData.discover}>Explore more</Button>
-            <Button to={navLinksData.sell} outlined>
-              Create NFT
-            </Button>
+        <section className='container'>
+          <div className='md:w-1/2'>
+            <h2 className='text-5xl md:text-7xl'>Discover And Create NFTs</h2>
+            <br />
+            <p className='text-textGrey'>
+              Discover, Create and Sell NFTs On Our NFT Marketplace With Over
+              Thousands Of NFTs And Get a{' '}
+              <span className='text-dark font-semibold'>$20 bonus</span>.
+            </p>
+            <br />
+            <div className='flex gap-6'>
+              <Button to={navLinksData.discover}>Explore more</Button>
+              <Button to={navLinksData.sell} outlined>
+                Create NFT
+              </Button>
+            </div>
+            <div className='my-3 md:my-8' />
+
+            <Description.Group
+              options={[
+                { title: '454K+', children: 'Art Works' },
+                { title: '159K+', children: 'Creators' },
+                { title: '87K+', children: 'Collections' },
+              ]}
+            />
           </div>
-          <br />
-          <br />
-          <Description.Group
-            options={[
-              { title: '454K+', children: 'Art Works' },
-              { title: '159K+', children: 'Creators' },
-              { title: '87K+', children: 'Collections' },
-            ]}
-          />
         </section>
       </article>
       <br />

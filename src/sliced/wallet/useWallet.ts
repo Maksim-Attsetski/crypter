@@ -3,12 +3,12 @@ import { Service } from 'features/service';
 import { useAuth } from 'sliced/auth';
 
 import { IWallet } from './types';
-import { useAuthState } from './state';
+import { useWalletState } from './state';
 
 const walletService = new Service('wallets');
 
 export const useWallet = () => {
-  const { wallet, setWallet } = useAuthState();
+  const { wallet, setWallet } = useWalletState();
   const { user } = useAuth();
 
   const onCreateWallet = async (user_id: number) => {
